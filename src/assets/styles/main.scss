@@ -1,0 +1,28 @@
+// --------------------------------------------------------------------
+// !-- How to keep our CSS clean
+// --------------------------------------------------------------------
+//
+// - Add a table of contents on top of your files.
+// - Don't nest more then 3 levels deep.
+// - Group properties by section.
+//      1. Positioning
+//      2. Display & Box Model
+//      3. Text
+//      4. Appearance
+//      5. Other
+// - Avoid unreadable shorthands.
+// - Put media queries close to the effected selectors.
+// - Quick hacks should be put in shame.scss
+// - Improve badly written CSS whenever you encounter it.
+//
+// --------------------------------------------------------------------
+
+
+
+// --------------------------------------------------------------------
+// !-- Imports
+// --------------------------------------------------------------------
+
+
+@import "global/global";
+@import "shame";
