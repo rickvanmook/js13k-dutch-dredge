@@ -6,3 +6,104 @@
 // which is why it should stay empty.
 //
 // --------------------------------------------------------------------
+
+$boxHeight: 30px;
+$boxDimension: 90px;
+
+.foo {
+	position: absolute;
+	top:50%;
+	left:50%;
+	width: $boxDimension;
+	height: $boxHeight;
+	background-color: red;
+	transform: translate(-50%, -50%);
+}
+
+.wrap {
+	//perspective: 800px;
+	transform: translate(-50%, -50%);
+	//perspective-origin: $boxDimension/2 $boxHeight/2;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.cube {
+	position: relative;
+	width: $boxDimension;
+	transform-style: preserve-3d;
+}
+
+.cube-1 {
+	transform: rotateX(-25deg) rotateY(-45deg);
+}
+
+.cube-2 {
+	transform: rotateX(-25deg) rotateY(-45deg) translateX(90px);
+}
+
+
+.back, .front, .left, .right {
+	width: $boxDimension;
+	height: $boxHeight;
+
+	line-height: $boxHeight;
+}
+
+.top, .bottom {
+	width: $boxDimension;
+	height: $boxDimension;
+	line-height: $boxDimension;
+}
+
+.back {
+	transform: translate3d(0, -$boxHeight/2, -$boxDimension/2) rotateY(180deg);
+	transform-origin: center center;
+}
+.right {
+	transform: translate3d($boxDimension/2, -$boxHeight/2, 0) rotateY(90deg);
+	transform-origin: center;
+}
+.left {
+
+	transform: translate3d(-$boxDimension/2, -$boxHeight/2, 0) rotateY(-90deg);
+	transform-origin: center;
+}
+.front {
+	transform: translate3d(0, -$boxHeight/2, $boxDimension/2);
+	transform-origin: center;
+}
+
+
+.top {
+	transform: translate3d(0, -($boxDimension + $boxHeight/2), $boxDimension/2) rotateX(90deg);
+	transform-origin: bottom;
+}
+.bottom {
+	transform: translate3d(0, ($boxHeight/2), $boxDimension/2) rotateX(-90deg);
+	transform-origin: top;
+
+//translate3d(0, 25px, 60px) rotateX(-90deg)
+}
+
+
+.cube div {
+	position: absolute;
+	background: rgba(255,255,255,0.1);
+	box-shadow: inset 0 0 30px rgba(125,125,125,0.8);
+	font-size: 20px;
+	text-align: center;
+	color: rgba(0,0,0,0.5);
+	font-family: sans-serif;
+	text-transform: uppercase;
+}
+
+@keyframes spin {
+	from { transform: rotateX(0deg) rotateZ(0deg); }
+	to { transform: rotateX(360deg) rotateZ(360deg); }
+}
+
+.has-animation {
+	//animation: spin 15s infinite linear;
+}
