@@ -8,7 +8,7 @@ module.exports = function(taskName) {
 		cb = cb || function (e) {
 		};
 
-		var args = ['styles', 'copyHtml'];
+		var args = ['styles', 'copyHtml', 'copyJs'];
 
 		if (!global.isProd) {
 

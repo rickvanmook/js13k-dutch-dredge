@@ -9,8 +9,16 @@ var	styles = {
         dest:'dist',
         clean:'dist/**/*.html'
     },
+    js = {
+        src:[
+            'src/**/*.js'
+        ],
+        dest:'dist',
+        clean:'dist/**/*.js'
+    },
     clean = 'dist';
 
 exports.clean = clean;
 exports.html = html;
+exports.js = js;
 exports.styles = styles;

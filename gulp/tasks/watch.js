@@ -7,5 +7,6 @@ module.exports = function(taskName) {
 
 		gulp.watch(config.styles.src, ['styles']);
         gulp.watch(config.html.src, ['copyHtml']);
+        gulp.watch(config.js.src, ['copyJs']);
 	});
 };
