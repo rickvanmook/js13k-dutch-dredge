@@ -15,8 +15,6 @@ module.exports = function(taskName) {
 				outputStyle: global.isProd ? 'compressed' : 'expanded'
 			}))
 			.on('error', handleErrors)
-			.pipe(autoprefixer('last 2 versions', '> 1%', 'ie >= 9'))
-			.on('error', handleErrors)
 			.pipe(gulp.dest(config.styles.dest));
 
 	});
