@@ -13,6 +13,9 @@ module.exports = function(taskName) {
 		if (!global.isProd) {
 
 			args.push('watch', 'browserSync');
+		} else {
+
+			args.push('uglify');
 		}
 
 		args.push(cb);

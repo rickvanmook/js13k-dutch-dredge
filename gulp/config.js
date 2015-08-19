@@ -16,9 +16,17 @@ var	styles = {
         dest:'dist',
         clean:'dist/**/*.js'
     },
+    uglify = {
+        src:[
+            'dist/**/*.js'
+        ],
+        dest:'dist',
+        clean:'dist/**/*.js'
+    },
     clean = 'dist';
 
 exports.clean = clean;
 exports.html = html;
 exports.js = js;
+exports.uglify = uglify;
 exports.styles = styles;
