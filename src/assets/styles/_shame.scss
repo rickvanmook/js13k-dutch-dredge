@@ -10,6 +10,10 @@
 $boxHeight: 30px;
 $boxDimension: 60px;
 
+html {
+	background:#c0c0c0;
+}
+
 .wrap {
 	//perspective: 800px;
 	transform: translate(-50%, -50%);
