@@ -10,18 +10,6 @@
 $boxHeight: 30px;
 $boxDimension: 60px;
 
-
-
-.foo {
-	position: absolute;
-	top:50%;
-	left:50%;
-	width: $boxDimension;
-	height: $boxHeight;
-	background-color: red;
-	transform: translate(-50%, -50%);
-}
-
 .wrap {
 	//perspective: 800px;
 	transform: translate(-50%, -50%);
@@ -37,20 +25,26 @@ $boxDimension: 60px;
 	width: $boxDimension;
 	transform-style: preserve-3d;
 	transition: all 300ms;
+	backface-visibility: hidden
 }
 
 .back, .front, .left, .right {
 	width: $boxDimension;
 	height: $boxHeight;
 	background-color: sandybrown;
+	transform-origin: center;
 }
 
 .top {
 	background-color: forestgreen;
+	transform: translate3d(0, -($boxDimension + $boxHeight/2), $boxDimension/2) rotateX(90deg);
+	transform-origin: bottom;
 }
 
 .bottom {
 	background-color: midnightblue;
+	transform: translate3d(0, ($boxHeight/2), $boxDimension/2) rotateX(-90deg);
+	transform-origin: top;
 }
 
 .top, .bottom {
@@ -61,51 +55,19 @@ $boxDimension: 60px;
 
 .back {
 	transform: translate3d(0, -$boxHeight/2, -$boxDimension/2) rotateY(180deg);
-	transform-origin: center center;
 }
 .right {
 	transform: translate3d($boxDimension/2, -$boxHeight/2, 0) rotateY(90deg);
-	transform-origin: center;
 }
 .left {
 
 	transform: translate3d(-$boxDimension/2, -$boxHeight/2, 0) rotateY(-90deg);
-	transform-origin: center;
 }
 .front {
 	transform: translate3d(0, -$boxHeight/2, $boxDimension/2);
-	transform-origin: center;
-}
-
-
-.top {
-	transform: translate3d(0, -($boxDimension + $boxHeight/2), $boxDimension/2) rotateX(90deg);
-	transform-origin: bottom;
-}
-.bottom {
-	transform: translate3d(0, ($boxHeight/2), $boxDimension/2) rotateX(-90deg);
-	transform-origin: top;
-
-//translate3d(0, 25px, 60px) rotateX(-90deg)
-}
-
-.cube {
-	&:hover {
-
-		opacity: 0.5;
-	}
 }
 
 .cube div {
 	position: absolute;
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
-}
-
-@keyframes spin {
-	from { transform: rotateX(0deg) rotateZ(0deg); }
-	to { transform: rotateX(360deg) rotateZ(360deg); }
-}
-
-.has-animation {
-	//animation: spin 15s infinite linear;
 }
