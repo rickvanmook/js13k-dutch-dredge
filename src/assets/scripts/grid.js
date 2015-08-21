@@ -19,6 +19,8 @@ for(x; x < ROWS; x++) {
 	}
 }
 
+// creating a style tag and add generated CSS in it
+doc.head[appendChild](createDiv('style')).text=injectCss;
 
 function createCell(x,y) {
 
