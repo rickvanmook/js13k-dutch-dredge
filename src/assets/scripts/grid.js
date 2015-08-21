@@ -1,8 +1,7 @@
-var doc = document,
+var // this is the generic transform for the cells, values A,B and C are dynamically replaced later
 	TRANSFORM = 'rotateX(-25deg) rotateY(-45deg) translate3d(Apx,Bpx,0) rotateX(Cdeg)',
 	ACTIVE_CLASS = 'cssClass',
 	appendChild = 'appendChild',
-	wrap = doc.body[appendChild](createDiv('wrap')),
 	injectCss='',
 	cells = {},
 	x = 0,
@@ -19,16 +18,19 @@ for(x; x < ROWS; x++) {
 	}
 }
 
-// creating a style tag and add generated CSS in it
-doc.head[appendChild](createDiv('style')).text=injectCss;
+
+// P is the id of the <style> tag (elements with an ID are globally accesable)
+P.innerHTML=injectCss;
 
 function createCell(x,y) {
 
 
 	var sides = ['front','back','top','bottom','left','right'],
 		className = ACTIVE_CLASS+x+ y,
-		hitfieldEl = wrap[appendChild](createDiv('cube ' + className)),
-		animationEl = wrap[appendChild](createDiv('cube no ' + className));
+
+		// W is a reference to the wrapper div in the HTML file
+		hitfieldEl = W[appendChild](createDiv('cube ' + className)),
+		animationEl = W[appendChild](createDiv('cube no ' + className));
 
 
 	hitfieldEl.x = animationEl.x = x;
@@ -130,7 +132,7 @@ function positionCell(cell, isActive, isRotated) {
  */
 function createDiv(className) {
 
-	var div = doc.createElement('div');
+	var div = document.createElement('div');
 	div.className = className;
 
 	return div;
