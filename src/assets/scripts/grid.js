@@ -1,13 +1,12 @@
 var doc = document,
-	TRANSFORM = 'rotateX(-25deg) rotateY(-45deg) translate3d(Apx,Bpx,0)',
-	ACTIVE_CLASS = appendChild = 'appendChild',
+	TRANSFORM = 'rotateX(-25deg) rotateY(-45deg) translate3d(Apx,Bpx,0) rotateX(Cdeg)',
+	ACTIVE_CLASS = 'cssClass',
+	appendChild = 'appendChild',
 	wrap = doc.body[appendChild](createDiv('wrap')),
-	hoverCss='',
+	injectCss='',
 	cells = {},
 	x = 0,
 	y,
-	OFFSET_X = 0,
-	OFFSET_Y = 0,
 	ROWS = 6,
 	COLUMNS = 6;
 
@@ -20,37 +19,64 @@ for(x; x < ROWS; x++) {
 	}
 }
 
-var styleEl = doc.getElementsByTagName('style')[0];
-styleEl.innerHTML = hoverCss;
 
 function createCell(x,y) {
 
+
 	var sides = ['front','back','top','bottom','left','right'],
-		className = ACTIVE_CLASS+x+y,
-		container = wrap[appendChild](createDiv('cube ' + className));
-
-	container.x = x;
-	container.y = y;
+		className = ACTIVE_CLASS+x+ y,
+		hitfieldEl = wrap[appendChild](createDiv('cube ' + className)),
+		animationEl = wrap[appendChild](createDiv('cube no ' + className));
 
 
-	hoverCss+= '.' + className + '{transform:'+positionCell(container)+'}';
-	hoverCss+= '.' + className + '.'+ACTIVE_CLASS+'{transform:'+positionCell(container,1)+'}';
+	hitfieldEl.x = animationEl.x = x;
+	hitfieldEl.y = animationEl.y = y;
+	hitfieldEl.f = animationEl.f = 0;
+
+
+	// hitfield
+	injectCss+= '.' + className +'{transform:'+positionCell(hitfieldEl,1)+'}';
+
+	// normal
+	injectCss+= '.' + className + '.no{transform:'+positionCell(hitfieldEl)+'}';
+
+	// flipped
+	injectCss+= '.' + className + '.'+ACTIVE_CLASS+ACTIVE_CLASS+'.no{transform:'+positionCell(hitfieldEl,0,1)+'}';
+
+	// flipped hover
+	injectCss+= '.' + className + '.'+ACTIVE_CLASS+ACTIVE_CLASS+'.'+ACTIVE_CLASS+'.no{transform:'+positionCell(hitfieldEl,1,1)+'}';
+
+
+	// normal hover
+	injectCss+= '.' + className + '.' + ACTIVE_CLASS+'.no{transform:'+positionCell(hitfieldEl,1)+'}';
+
+
 
 	while(sides.length) {
-		container[appendChild](createDiv(sides.shift()));
+		animationEl[appendChild](createDiv(sides.shift()));
 	}
 
-	container.addEventListener('mouseover',activateCells);
-	container.addEventListener('mouseout', deactivateCells);
 
-	return container;
+	hitfieldEl.innerHTML = animationEl.innerHTML;
+
+	hitfieldEl.addEventListener('mouseover',activateCells);
+	hitfieldEl.addEventListener('mouseout', deactivateCells);
+	hitfieldEl.addEventListener('click', flipCells);
+
+	return animationEl;
+}
+
+function flipCells() {
+	cellsAction(this, 1);
 }
 
 function activateCells() {
+
 	cellsAction(this, 'add');
 }
 
 function deactivateCells() {
+
 	cellsAction(this, 'remove');
 }
 
@@ -64,9 +90,19 @@ function cellsAction(cell, method) {
 
 	function getCell(x,y){
 		var actualCell = cells[ACTIVE_CLASS+x+y];
-		if(actualCell && actualCell.b != method) {
-			actualCell.b=method;
-			actualCell.classList[method](ACTIVE_CLASS);
+
+		if(actualCell) {
+			if (method == 1) {
+
+				actualCell.f = !actualCell.f;
+				actualCell.classList[(actualCell.f) ? 'add' : 'remove'](ACTIVE_CLASS + ACTIVE_CLASS);
+
+			} else if (actualCell.b != method) {
+
+
+				actualCell.b = method;
+				actualCell.classList[method](ACTIVE_CLASS);
+			}
 		}
 	}
 }
@@ -76,13 +112,14 @@ function positionCell(cell, isActive, isRotated) {
 
 	var _x = cell.x*59.5 - cell.y*59;
 	var _y = cell.y*39;
+	var _z = isRotated ? 180 : 0;
 
 	if(isActive) {
 
-		_y-=15;
+		_y-=10;
 	}
 
-	return TRANSFORM.replace('A',_x).replace('B',_y);
+	return TRANSFORM.replace('A',_x).replace('B',_y).replace('C',_z);
 }
 
 /**

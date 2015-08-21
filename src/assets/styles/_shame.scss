@@ -29,8 +29,16 @@ html {
 	width: $boxDimension;
 	transform-style: preserve-3d;
 	transition: all 300ms;
-	backface-visibility: hidden
+	backface-visibility: hidden;
+	opacity: 0;
+	cursor: pointer;
+
+	&.no {
+		pointer-events: none;
+		opacity: 1;
+	}
 }
+
 
 .back, .front, .left, .right {
 	width: $boxDimension;
@@ -54,7 +62,6 @@ html {
 .top, .bottom {
 	width: $boxDimension;
 	height: $boxDimension;
-	line-height: $boxDimension;
 }
 
 .back {
