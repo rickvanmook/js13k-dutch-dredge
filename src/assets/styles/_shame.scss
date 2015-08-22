@@ -26,12 +26,9 @@ html {
 
 .cube {
 	position: relative;
-	width: $boxDimension;
 	transform-style: preserve-3d;
 	transition: all 300ms;
-	backface-visibility: hidden;
 	opacity: 0;
-	cursor: pointer;
 
 	&.no {
 		pointer-events: none;
