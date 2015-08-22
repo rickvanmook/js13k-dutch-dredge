@@ -26,7 +26,7 @@ function createCell(x,y) {
 		hitfieldEl = W[appendChild](createDiv('cube ' + className)),
 		animationEl = W[appendChild](createDiv('cube no ' + className));
 
-
+	animationEl.h = hitfieldEl;
 	hitfieldEl.x = animationEl.x = x;
 	hitfieldEl.y = animationEl.y = y;
 	hitfieldEl.f = animationEl.f = 0;
