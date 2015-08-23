@@ -33,6 +33,7 @@ function hideCell(cellEl) {
 
 	// s stands for 'shown' so we can check whether or not this cell is in the level
 	cellEl.s = 0;
+	cellEl.f = 0;
 
 	// h is the hitField element corresponding with this cell
 	cellEl.h.style.display =
@@ -85,21 +86,44 @@ function flipCell(cellEl) {
 function newLevel(params) {
 
 	// start and solution are 36 character strings which hide, show and flip the cells for the start of a level
-	var start = params[0],
-		solution = params[1],
-		cell;
+	var cell;
+
+	_start = params[0];
+	_solution = params[1];
 
 	_cells.forEach(hideCell);
 
-	for(var i = 0; i < start.length; i++) {
+	for(_y = 0;_y < _start.length; _y++) {
 
-		if((_x = start[i]) != ' ') {
+		if((_x = _start[_y]) != ' ') {
 
-			cell = showCell(_cells[i]);
+			cell = showCell(_cells[_y]);
 
-			if(_x == '0') {
+			if(+_x > 0) {
 				flipCell(cell);
 			}
 		}
 	}
+}
+
+/**
+ *
+ */
+function checkSolution() {
+
+	for(var i = 0; i < _cells.length; i++) {
+
+		if(_solution[i] != ' ' && _cells[i].f != _solution[i]) {
+
+			return
+		}
+	}
+
+	if(levels.length) {
+
+		newLevel(levels.shift());
+	}
+
+
+
 }

@@ -2,6 +2,8 @@ var // this is the generic transform for the _cells, values A,B and C are dynami
 	TRANSFORM = 'rotateX(-25deg) rotateY(-45deg) translate3d(Apx,Bpx,0) rotateX(Cdeg)',
 	CSS_CLASS = 'cssClass',
 	appendChild = 'appendChild',
+	_solution,
+	_start,
 	_cells = [],
 	_i=0,
 	_j;
@@ -29,7 +31,6 @@ function createCell(x,y) {
 	animationEl.h = hitfieldEl;
 	hitfieldEl.x = animationEl.x = x;
 	hitfieldEl.y = animationEl.y = y;
-	hitfieldEl.f = animationEl.f = 0;
 
 
 
@@ -68,7 +69,10 @@ function createCell(x,y) {
 }
 
 function onClick() {
+
 	cellsAction(getCell(this.x,this.y), flipCell);
+
+	checkSolution();
 }
 
 function onMouseOver() {
