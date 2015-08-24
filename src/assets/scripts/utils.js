@@ -113,6 +113,7 @@ function checkSolution() {
 
 	for(var i = 0; i < _cells.length; i++) {
 
+
 		if(_solution[i] != ' ' && _cells[i].f != _solution[i]) {
 
 			return
@@ -121,9 +122,39 @@ function checkSolution() {
 
 	if(levels.length) {
 
-		newLevel(levels.shift());
+		celebrate();
+	}
+}
+
+function celebrate() {
+
+	_x = _isPlaying = 0;
+
+
+	for(_x; _x < _cells.length; _x++) {
+
+
+		_y = _cells[_x];
+
+		if(_y.s) {
+
+			liftCell(_y, _x * 20);
+		}
 	}
 
+	function liftCell(cell, delay) {
 
+		idleCell(cell);
 
+		setTimeout(function() {
+
+			hoverCell(cell);
+
+			setTimeout(function() {
+
+				idleCell(cell);
+				liftCell(cell, 380);
+			}, 380);
+		}, delay);
+	}
 }

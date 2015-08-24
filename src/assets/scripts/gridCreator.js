@@ -2,6 +2,7 @@ var // this is the generic transform for the _cells, values A,B and C are dynami
 	TRANSFORM = 'rotateX(-25deg) rotateY(-45deg) translate3d(Apx,Bpx,0) rotateX(Cdeg)',
 	CSS_CLASS = 'cssClass',
 	appendChild = 'appendChild',
+	_isPlaying = 1,
 	_solution,
 	_start,
 	_cells = [],
@@ -87,7 +88,7 @@ function onMouseOut() {
 
 function cellsAction(cell, method) {
 
-	if(cell.s) {
+	if(cell.s && _isPlaying) {
 
 		method(getCell(cell.x,cell.y));
 		method(getCell(cell.x-1,cell.y));
