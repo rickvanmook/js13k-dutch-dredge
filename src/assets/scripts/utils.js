@@ -138,7 +138,7 @@ function checkSolution() {
 
 	} else {
 
-		alert('done!');
+		alert('You beat all the levels!\nRefresh the page to start again.');
 	}
 }
 
