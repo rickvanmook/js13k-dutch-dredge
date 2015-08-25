@@ -33,24 +33,34 @@ function hideCell(cellEl) {
 
 	// s stands for 'shown' so we can check whether or not this cell is in the level
 	cellEl.s = 0;
-	cellEl.f = 0;
+
+	hoverCell(cellEl);
 
 	// h is the hitField element corresponding with this cell
-	cellEl.h.style.display =
-	cellEl.style.display = 'none';
+	cellEl.h.classList.add('no');
+	cellEl.style.opacity = 0;
 }
 
 /**
  * @param {Element} cellEl
  */
-function showCell(cellEl) {
+function showCell(cellEl, delay) {
 
 	// s stands for 'shown' so we can check whether or not this cell is in the level
 	cellEl.s = 1;
+	cellEl.f = 0;
+	cellEl.classList.remove(CSS_CLASS + CSS_CLASS);
 
 	// h is the hitField element corresponding with this cell
-	cellEl.h.style.display =
-	cellEl.style.display = '';
+	cellEl.h.classList.remove('no');
+
+	setTimeout(function(){
+
+		cellEl.style.opacity = 1;
+		idleCell(cellEl);
+	}, delay);
+
+
 	return cellEl
 }
 
@@ -66,7 +76,7 @@ function hoverCell(cellEl) {
  * @param {Element} cellEl
  */
 function idleCell(cellEl) {
-
+	cellEl.opacity = 1;
 	cellEl.classList.remove(CSS_CLASS);
 }
 
@@ -83,23 +93,25 @@ function flipCell(cellEl) {
 /**
  * @param {Array} params
  */
-function newLevel(params) {
+function newLevel() {
 
-	// start and solution are 36 character strings which hide, show and flip the cells for the start of a level
 	var cell;
 
-	_start = params[0];
-	_solution = params[1];
+	_isPlaying = _y = levels.shift();
+
+	// start and solution are 36 character strings which hide, show and flip the cells for the start of a level
+	_start = _y[0];
+	_solution = _y[1];
 
 	_cells.forEach(hideCell);
 
-	for(_y = 0;_y < _start.length; _y++) {
+	for (_y = 0; _y < _start.length; _y++) {
 
-		if((_x = _start[_y]) != ' ') {
+		if ((_x = _start[_y]) != ' ') {
 
-			cell = showCell(_cells[_y]);
+			cell = showCell(_cells[_y], 300 + _y*20);
 
-			if(+_x > 0) {
+			if(+_x) {
 				flipCell(cell);
 			}
 		}
@@ -120,9 +132,13 @@ function checkSolution() {
 		}
 	}
 
-	if(levels.length) {
+	if(levels.length && _isPlaying) {
 
 		celebrate();
+
+	} else {
+
+		alert('done!');
 	}
 }
 
@@ -142,19 +158,31 @@ function celebrate() {
 		}
 	}
 
-	function liftCell(cell, delay) {
+	// 1200 is the total delay of all the timeouts from liftCell. _x *20 is the biggest delay from the loop.
+	// it's ugly, I know... Nobody said it was going to be pretty
+	setTimeout(newLevel, 1200 + _x * 20);
 
-		idleCell(cell);
+	function liftCell(cellEl, delay) {
 
+		// wait until we have lowered the last clicked tiles
 		setTimeout(function() {
 
-			hoverCell(cell);
+			idleCell(cellEl);
 
+			// lift all the cells with a little delay
 			setTimeout(function() {
 
-				idleCell(cell);
-				liftCell(cell, 380);
-			}, 380);
-		}, delay);
+				hoverCell(cellEl);
+
+				// lift all the cells with a little delay
+				setTimeout(function() {
+
+					// lower and fade out all the cells
+					idleCell(cellEl);
+					cellEl.style.opacity = 0;
+
+				}, 300);
+			}, delay + 300);
+		}, 300);
 	}
 }

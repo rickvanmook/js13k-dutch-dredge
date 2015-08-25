@@ -50,4 +50,4 @@ var levels = [
 	]
 ];
 
-newLevel(levels.shift());
+newLevel();
