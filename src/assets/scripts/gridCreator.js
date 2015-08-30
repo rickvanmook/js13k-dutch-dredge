@@ -65,11 +65,14 @@ function createCell(x,y) {
 	hitfieldEl.addEventListener('mouseover',onMouseOver);
 	hitfieldEl.addEventListener('mouseout', onMouseOut);
 	hitfieldEl.addEventListener('click', onClick);
+	hitfieldEl.addEventListener('touchend', onClick);
 
 	_cells.push(animationEl);
 }
 
-function onClick() {
+function onClick(e) {
+
+	e.preventDefault();
 
 	cellsAction(getCell(this.x,this.y), flipCell);
 

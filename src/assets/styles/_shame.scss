@@ -23,15 +23,32 @@ html {
 
 	position: absolute;
 	top: 6px;
-	left: 48%;
+	width: 100%;
+	text-align: center;
 }
 
 #W {
 	transform: translate(-50%, -50%);
 	position: absolute;
-	height: 150px;
 	top: 50%;
 	left: 50%;
+
+	overflow: hidden;
+
+	width: 504px;
+	height: 260px;
+
+
+}
+
+@media (max-width: 504px) {
+	#W{
+		transform: translate(-50%, -50%) scale(0.65);
+	}
+	#R {
+		position: relative;
+		text-align: left;
+	}
 }
 
 .cube {
@@ -39,6 +56,9 @@ html {
 	transform-style: preserve-3d;
 	transition: all .3s;
 	opacity: 0;
+	transform-origin: -70px 0;
+	left: 250px;
+	top: 15px;
 }
 
 .no {
