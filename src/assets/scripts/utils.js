@@ -31,14 +31,13 @@ function getCell(x,y){
  */
 function hideCell(cellEl) {
 
-	// s stands for 'shown' so we can check whether or not this cell is in the level
-	cellEl.s = 0;
-
 	hoverCell(cellEl);
 
 	// h is the hitField element corresponding with this cell
 	cellEl.h.classList.add('no');
-	cellEl.style.opacity = 0;
+
+	// s stands for 'shown' so we can check whether or not this cell is in the level
+	cellEl.s = cellEl.style.opacity = 0;
 }
 
 /**
@@ -46,8 +45,6 @@ function hideCell(cellEl) {
  */
 function showCell(cellEl, delay) {
 
-	// s stands for 'shown' so we can check whether or not this cell is in the level
-	cellEl.s = 1;
 	cellEl.f = 0;
 	cellEl.classList.remove(CSS_CLASS + CSS_CLASS);
 
@@ -56,7 +53,8 @@ function showCell(cellEl, delay) {
 
 	setTimeout(function(){
 
-		cellEl.style.opacity = 1;
+		// s stands for 'shown' so we can check whether or not this cell is in the level
+		cellEl.s = cellEl.style.opacity = 1;
 		idleCell(cellEl);
 	}, delay);
 
