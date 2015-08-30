@@ -91,28 +91,28 @@ function flipCell(cellEl) {
 }
 
 /**
- * @param {Array} params
+ * @param {Boolean} isResetAndCell
  */
-function newLevel() {
+function newLevel(isResetAndCell) {
 
-	var cell;
+	// isResetAndCell is used twice so we don't have to waste 4 chars declaring a local 'var '
+	if(!isResetAndCell) {
 
-	_isPlaying = _y = levels.shift();
+		// start is a 36 character strings which hide, show and flip the cells for the start of a level
+		_isPlaying = _start = levels.shift();
 
-	// start and solution are 36 character strings which hide, show and flip the cells for the start of a level
-	_start = _y[0];
-	_solution = _y[1];
+		_cells.forEach(hideCell);
+	}
 
-	_cells.forEach(hideCell);
 
 	for (_y = 0; _y < _start.length; _y++) {
 
 		if ((_x = _start[_y]) != ' ') {
 
-			cell = showCell(_cells[_y], 300 + _y*20);
+			isResetAndCell = showCell(_cells[_y], 300 + _y*20);
 
 			if(+_x) {
-				flipCell(cell);
+				flipCell(isResetAndCell);
 			}
 		}
 	}
@@ -126,7 +126,7 @@ function checkSolution() {
 	for(var i = 0; i < _cells.length; i++) {
 
 
-		if(_solution[i] != ' ' && _cells[i].f != _solution[i]) {
+		if(_start[i] != ' ' && _cells[i].f != '0') {
 
 			return
 		}
