@@ -18,6 +18,9 @@
 // --------------------------------------------------------------------
 
 
+$boxHeight: 30px;
+$boxDimension: 60px;
+
 
 // --------------------------------------------------------------------
 // !-- Imports
@@ -25,4 +28,6 @@
 
 
 @import "global/global";
+@import "global/surface";
+@import "global/water";
 @import "shame";

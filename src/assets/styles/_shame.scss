@@ -7,8 +7,7 @@
 //
 // --------------------------------------------------------------------
 
-$boxHeight: 30px;
-$boxDimension: 60px;
+
 
 html {
 	background:#c0c0c0;
@@ -66,45 +65,8 @@ html {
 }
 
 
-.back, .front, .left, .right {
-	width: $boxDimension;
-	height: $boxHeight;
-	background-color: sandybrown;
-	transform-origin: center;
-}
 
-.top {
-	background-color: forestgreen;
-	transform: translate3d(0, -($boxDimension + $boxHeight/2), $boxDimension/2) rotateX(90deg);
-	transform-origin: bottom;
-}
-
-.bottom {
-	background-color: midnightblue;
-	transform: translate3d(0, ($boxHeight/2), $boxDimension/2) rotateX(-90deg);
-	transform-origin: top;
-}
-
-.top, .bottom {
-	width: $boxDimension;
-	height: $boxDimension;
-}
-
-.back {
-	transform: translate3d(0, -$boxHeight/2, -$boxDimension/2) rotateY(180deg);
-}
-.right {
-	transform: translate3d($boxDimension/2, -$boxHeight/2, 0) rotateY(90deg);
-}
-.left {
-
-	transform: translate3d(-$boxDimension/2, -$boxHeight/2, 0) rotateY(-90deg);
-}
-.front {
-	transform: translate3d(0, -$boxHeight/2, $boxDimension/2);
-}
 
 .cube div {
 	position: absolute;
-	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
 }

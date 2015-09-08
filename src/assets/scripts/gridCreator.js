@@ -22,7 +22,15 @@ for(_i; _i < 6; _i++) {
 
 function createCell(x,y) {
 
-	var sides = ['front','back','top','bottom','left','right'],
+	var sides = [
+			'surface top','surface bottom',
+			'surface right',
+			'surface front','surface back',
+
+			'water top', 'water bottom',
+			'water left', 'water right',
+			'water front', 'water back'
+		],
 		className = CSS_CLASS + x + y,
 
 		// W is a reference to the wrapper div in the HTML file
