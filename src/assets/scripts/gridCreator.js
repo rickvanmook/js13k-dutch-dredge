@@ -35,7 +35,7 @@ function createCell(x,y) {
 
 		// W is a reference to the wrapper div in the HTML file
 		hitfieldEl = W[appendChild](createDiv('cube ' + className)),
-		animationEl = W[appendChild](createDiv('cube no ' + className));
+		animationEl = W[appendChild](createDiv('y'+ y + ' cube no ' + className));
 
 	animationEl.h = hitfieldEl;
 	hitfieldEl.x = animationEl.x = x;
