@@ -5,17 +5,17 @@
 	&.back, &.front, &.right {
 
 		height: 7px;
-		background-color: #F4A460;
+		background-color: #ce9c5a;
 		transform-origin: center;
-		box-shadow: inset 0 0 0 1px rgba(120, 81, 47, 0.4);
+		box-shadow: inset 0 0 0 1px #7b6b18;
 	}
 
 	&.top {
-		background-color: #228B22;
+		background-color: #00cc00;
 		transform: translate3d(0, -($boxDimension + $boxHeight/2), $boxDimension/2) rotateX(90deg);
 		transform-origin: bottom;
 		height: 60px;
-		box-shadow: inset 0 0 0 1px rgba(21, 84, 21, 0.9);
+		box-shadow: inset 0 0 0 1px #006800;
 	}
 
 	&.back {
@@ -28,5 +28,3 @@
 		transform: translate3d(0, -$boxHeight/2, $boxDimension/2);
 	}
 }
-
-
