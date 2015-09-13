@@ -97,7 +97,7 @@ function newLevel(isResetAndCell) {
 	if(!isResetAndCell) {
 
 		// start is a 36 character strings which hide, show and flip the cells for the start of a level
-		_isPlaying = _start = levels.shift();
+		_isPlaying = _start = levels.shift() || randomLevel();
 
 		_cells.forEach(hideCell);
 	}
@@ -130,14 +130,7 @@ function checkSolution() {
 		}
 	}
 
-	if(levels.length && _isPlaying) {
-
-		celebrate();
-
-	} else {
-
-		alert('You beat all the levels!\nRefresh the page to start again.');
-	}
+	celebrate();
 }
 
 function celebrate() {
@@ -183,4 +176,14 @@ function celebrate() {
 			}, delay + 300);
 		}, 300);
 	}
+}
+
+function randomLevel() {
+
+
+	for(_x='',_y=0;_y<36;_y++){
+		_x+=Math.round(Math.random());
+	}
+
+	return _x;
 }
