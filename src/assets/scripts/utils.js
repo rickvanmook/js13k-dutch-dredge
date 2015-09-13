@@ -93,6 +93,8 @@ function flipCell(cellEl) {
  */
 function newLevel(isResetAndCell) {
 
+	R.classList.remove('v');
+
 	// isResetAndCell is used twice so we don't have to waste 4 chars declaring a local 'var '
 	if(!isResetAndCell) {
 
@@ -102,6 +104,7 @@ function newLevel(isResetAndCell) {
 		_cells.forEach(hideCell);
 	}
 
+	_counter = 0;
 
 	for (_y = 0; _y < _start.length; _y++) {
 
@@ -121,10 +124,16 @@ function newLevel(isResetAndCell) {
  */
 function checkSolution() {
 
+
 	for(var i = 0; i < _cells.length; i++) {
 
 
 		if(_start[i] != ' ' && _cells[i].f != '0') {
+
+			if(_counter++ > 7) {
+
+				R.classList.add('v');
+			}
 
 			return
 		}
@@ -136,7 +145,7 @@ function checkSolution() {
 function celebrate() {
 
 	_x = _isPlaying = 0;
-
+	R.classList.remove('v');
 
 	for(_x; _x < _cells.length; _x++) {
 

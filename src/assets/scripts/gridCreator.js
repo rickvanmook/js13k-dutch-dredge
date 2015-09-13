@@ -3,7 +3,7 @@ var // this is the generic transform for the _cells, values A,B and C are dynami
 	CSS_CLASS = 'cssClass',
 	appendChild = 'appendChild',
 	_isPlaying = 1,
-	_solution,
+	_counter,
 	_start,
 	_cells = [],
 	_i=0,
