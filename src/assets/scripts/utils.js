@@ -56,6 +56,7 @@ function showCell(cellEl, delay) {
 		// s stands for 'shown' so we can check whether or not this cell is in the level
 		cellEl.s = cellEl.style.opacity = 1;
 		idleCell(cellEl);
+		new Audio('hover.mp3').play();
 	}, delay);
 
 
@@ -164,17 +165,17 @@ function celebrate() {
 
 	function liftCell(cellEl, delay) {
 
-		// wait until we have lowered the last clicked tiles
 		setTimeout(function() {
 
+			// wait until we have lowered the last clicked tiles
 			idleCell(cellEl);
 
-			// lift all the cells with a little delay
 			setTimeout(function() {
 
-				hoverCell(cellEl);
-
 				// lift all the cells with a little delay
+				hoverCell(cellEl);
+				new Audio('hover.mp3').play();
+
 				setTimeout(function() {
 
 					// lower and fade out all the cells

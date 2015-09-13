@@ -2,6 +2,8 @@ var // this is the generic transform for the _cells, values A,B and C are dynami
 	TRANSFORM = 'rotateX(-25deg) rotateY(-45deg) translate3d(Apx,Bpx,0) rotateX(Cdeg)',
 	CSS_CLASS = 'cssClass',
 	appendChild = 'appendChild',
+	_hoverSound = new Audio('hover.mp3'),
+	_clickSound = new Audio('click.mp3'),
 	_isPlaying = 1,
 	_counter,
 	_start,
@@ -33,7 +35,7 @@ function createCell(x,y) {
 		],
 		className = CSS_CLASS + x + y,
 
-		// W is a reference to the wrapper div in the HTML file
+	// W is a reference to the wrapper div in the HTML file
 		hitfieldEl = W[appendChild](createDiv('cube ' + className)),
 		animationEl = W[appendChild](createDiv('y'+ y + ' cube no ' + className));
 
@@ -46,20 +48,20 @@ function createCell(x,y) {
 	// P is the id of the <style> tag (elements with an ID are globally accessible)
 	P.innerHTML+=
 
-	// hitfield
-	'.' + className +'{transform:'+composeTransform(hitfieldEl,1)+'}'+
+		// hitfield
+		'.' + className +'{transform:'+composeTransform(hitfieldEl,1)+'}'+
 
-	// normal
-	'.' + className + '.no{transform:'+composeTransform(hitfieldEl)+'}'+
+			// normal
+		'.' + className + '.no{transform:'+composeTransform(hitfieldEl)+'}'+
 
-	// flipped
-	'.' + className + '.'+CSS_CLASS+CSS_CLASS+'.no{transform:'+composeTransform(hitfieldEl,0,1)+'}'+
+			// flipped
+		'.' + className + '.'+CSS_CLASS+CSS_CLASS+'.no{transform:'+composeTransform(hitfieldEl,0,1)+'}'+
 
-	// flipped hover
-	'.' + className + '.'+CSS_CLASS+CSS_CLASS+'.'+CSS_CLASS+'.no{transform:'+composeTransform(hitfieldEl,1,1)+'}'+
+			// flipped hover
+		'.' + className + '.'+CSS_CLASS+CSS_CLASS+'.'+CSS_CLASS+'.no{transform:'+composeTransform(hitfieldEl,1,1)+'}'+
 
-	// normal hover
-	'.' + className + '.' + CSS_CLASS+'.no{transform:'+composeTransform(hitfieldEl,1)+'}';
+			// normal hover
+		'.' + className + '.' + CSS_CLASS+'.no{transform:'+composeTransform(hitfieldEl,1)+'}';
 
 
 	sides.forEach(function(side){
@@ -84,11 +86,17 @@ function onClick(e) {
 
 	cellsAction(getCell(this.x,this.y), flipCell);
 
+	if(_isPlaying) {
+		_clickSound.play();
+	}
 	checkSolution();
 }
 
 function onMouseOver() {
 
+	if(_isPlaying) {
+		_hoverSound.play();
+	}
 	cellsAction(getCell(this.x,this.y), hoverCell);
 }
 
