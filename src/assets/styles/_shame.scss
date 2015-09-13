@@ -12,9 +12,18 @@
 #R {
 
 	position: absolute;
-	top: 6px;
+	top: 50%;
+	margin-top:150px;
 	width: 100%;
 	text-align: center;
+	opacity: 0;
+	transform:translateY(10px);
+	transition: 300ms all;
+
+	&.v {
+		transform:none;
+		opacity: 1;
+	}
 }
 
 #W {
